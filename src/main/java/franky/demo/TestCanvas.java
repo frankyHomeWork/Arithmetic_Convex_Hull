@@ -1,16 +1,40 @@
 package franky.demo;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class TestCanvas extends Canvas {
+
+    private int canvasWidth = 500;
+    private int canvasHight = 500;
+
     public TestCanvas() {
-        setSize(500,500);
+        setSize(this.canvasWidth, this.canvasHight);
     }
+
     public void paint(Graphics g) {
-        //畫一條直線,從座標(100,100)到(150,150)
         System.out.println("in paint");
-        g.drawLine(0,0,15,15);
     }
+
+    public void printCircle(int n_circle) { // how many circle
+        this.clearAll();
+        int circle_size = 10;
+        PointCreator pointCreator = PointCreator.getInstance();
+        pointCreator.clearPoints();
+        pointCreator.createRandomPoints(n_circle, this.canvasWidth, this.canvasHight);
+        ArrayList<Point> points = pointCreator.getPoints();
+
+        for(Point point : points) {
+            this.getGraphics().fillOval((int)point.getX(), (int)point.getY(), circle_size, circle_size);
+        }
+
+        System.out.println(points.toString());
+    }
+
+    public void clearAll() {
+        this.getGraphics().clearRect(0, 0, this.canvasWidth, this.canvasHight); // clear canvas
+    }
+
     public void update(Graphics g) {
         System.out.println("in Update");
     }
