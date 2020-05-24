@@ -24,8 +24,8 @@ public class TestCanvas extends Canvas {
         pointCreator.createRandomPoints(n_circle, this.canvasWidth, this.canvasHight);
         ArrayList<Point> points = pointCreator.getPoints();
 
-        for(Point point : points) {
-            this.getGraphics().fillOval((int)point.getX(), (int)point.getY(), circle_size, circle_size);
+        for (Point point : points) {
+            this.getGraphics().fillOval((int) point.getX(), (int) point.getY(), circle_size, circle_size);
         }
 
         System.out.println(points.toString());
