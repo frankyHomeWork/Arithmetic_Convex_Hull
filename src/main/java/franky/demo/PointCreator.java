@@ -18,10 +18,13 @@ public class PointCreator {
         return pointCreator;
     }
 
-    public void createRandomPoints(int n_point, int rangeX, int rangeY) {
+    public void createRandomPoints(int n_point, int range_start, int range_end) {
         for (int i = 0; i < n_point; i++) {
-            int x = (int) (Math.random() * rangeX);
-            int y = (int) (Math.random() * rangeY);
+
+            int range = range_end - range_start;
+
+            int x = range_start + (int) (Math.random() * range) + 1;
+            int y = range_start + (int) (Math.random() * range) + 1;
             Point point = new Point(x, y);
             points.add(point);
         }

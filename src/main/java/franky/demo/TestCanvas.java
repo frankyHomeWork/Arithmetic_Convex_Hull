@@ -16,27 +16,12 @@ public class TestCanvas extends Canvas {
         System.out.println("in paint");
     }
 
-    public void printCircle(int n_circle) { // how many circle
-        this.clearAll();
-        int circle_size = 10;
-        PointCreator pointCreator = PointCreator.getInstance();
-        pointCreator.clearPoints();
-        pointCreator.createRandomPoints(n_circle, this.canvasWidth, this.canvasHight);
-        ArrayList<Point> points = pointCreator.getPoints();
-
-        for (Point point : points) {
-            this.getGraphics().fillOval((int) point.getX(), (int) point.getY(), circle_size, circle_size);
-        }
-
-        System.out.println(points.toString());
-    }
-
     public void printCircle(ArrayList<Point> points) { // how many circle
         this.clearAll();
-        int circle_size = 10;
+        int circle_size = 5;
         for (Point point : points) {
             this.getGraphics().fillOval((int) point.getX(), (int) point.getY(), circle_size, circle_size);
-            String pointStr = "" + (int) point.getX() + ", " + (int) point.getY();
+            String pointStr = "(" + (int) point.getX() + ", " + (int) point.getY() +")";
             this.getGraphics().drawString(pointStr, (int) point.getX(), (int) point.getY());
         }
 
@@ -58,7 +43,6 @@ public class TestCanvas extends Canvas {
 
         }
 
-        System.out.println(points.toString());
     }
 
 

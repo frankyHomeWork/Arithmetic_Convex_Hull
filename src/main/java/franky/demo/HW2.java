@@ -26,6 +26,11 @@ public class HW2 {
 
         NextStepListener nextStepListener = new NextStepListener(a_canvas);
         CreateRandomPointListener createRandomPointListener = new CreateRandomPointListener(a_canvas, nextStepListener);
+
+        createRandomPointListener.setPoints_num(20);
+        createRandomPointListener.setPoints_range_start(50);
+        createRandomPointListener.setPoints_range_end(400);
+
         resetButton.addActionListener(createRandomPointListener);
 
         linkLineButton.addActionListener(nextStepListener);

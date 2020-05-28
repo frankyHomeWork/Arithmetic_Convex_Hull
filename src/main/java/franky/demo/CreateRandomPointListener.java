@@ -9,6 +9,10 @@ public class CreateRandomPointListener implements ActionListener {
     private TestCanvas canvas;
     private NextStepListener nextStepListener;
 
+    private int points_num = 30;
+    private int points_range_start = 20;
+    private int points_range_end = 400;
+
     public CreateRandomPointListener(TestCanvas canvas, NextStepListener nextStepListener) {
         this.canvas = canvas;
         this.nextStepListener = nextStepListener;
@@ -17,9 +21,20 @@ public class CreateRandomPointListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         pointCreator.clearPoints();
-        pointCreator.createRandomPoints(30, 300, 300);
+        pointCreator.createRandomPoints(points_num, points_range_start, points_range_end);
         canvas.printCircle(pointCreator.getPoints());
         nextStepListener.calculateConvexHull();
     }
 
+    public void setPoints_num(int points_num) {
+        this.points_num = points_num;
+    }
+
+    public void setPoints_range_start(int points_range_start) {
+        this.points_range_start = points_range_start;
+    }
+
+    public void setPoints_range_end(int points_range_end) {
+        this.points_range_end = points_range_end;
+    }
 }
