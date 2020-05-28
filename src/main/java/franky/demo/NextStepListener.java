@@ -29,13 +29,16 @@ public class NextStepListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(stepNum == 0) {
+            stepPoints.add(ansPoints.get(stepNum));
+            stepNum++;
+        }
         stepPoints.add(ansPoints.get(stepNum));
 
         canvas.linkCircle(stepPoints);
-
         if (stepNum < ansPoints.size() - 1) {
             stepNum++;
         }
+
     }
 }
