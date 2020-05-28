@@ -30,6 +30,7 @@ public class ConvexHullArithmetic {
         for (Point point : points_without_minPoint) {
             if(stack.size() < 4) {
 
+
             }
 
 
@@ -38,18 +39,24 @@ public class ConvexHullArithmetic {
 
     }
 
+    public double calculate3PointsAngle(Point p1, Point p2, Point p3) {
+        return getDegree(p2.x, p2.y, p1.x, p1.y, p3.x, p3.y);
+    }
 
-
-
-
-
-
-
-
-
-
-
-
+    private double getDegree(int vertexPointX, int vertexPointY, int point0X, int point0Y, int point1X, int point1Y) {
+        //code copy from https://www.twblogs.net/a/5c015ea0bd9eee7aed33aa0f
+        //向量的點乘
+        int vector = (point0X - vertexPointX) * (point1X - vertexPointX) + (point0Y - vertexPointY) * (point1Y - vertexPointY);
+        //向量的模乘
+        double sqrt = Math.sqrt(
+                (Math.abs((point0X - vertexPointX) * (point0X - vertexPointX)) + Math.abs((point0Y - vertexPointY) * (point0Y - vertexPointY)))
+                        * (Math.abs((point1X - vertexPointX) * (point1X - vertexPointX)) + Math.abs((point1Y - vertexPointY) * (point1Y - vertexPointY)))
+        );
+        //反餘弦計算弧度
+        double radian = Math.acos(vector / sqrt);
+        //弧度轉角度制
+        return 180 * radian / Math.PI;
+    }
 
     public void sortPointByAngle() {
         calculateAngleWithMinPoint();

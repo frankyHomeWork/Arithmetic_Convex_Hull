@@ -2,6 +2,8 @@ package franky.demo;
 
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConvexHullArithmeticTest {
@@ -40,5 +42,18 @@ class ConvexHullArithmeticTest {
 
     @Test
     void calculateDistanceP1_to_P2() {
+    }
+
+    @Test
+    void calculate3PointsAngle() {
+        PointCreator pointCreator = PointCreator.getInstance();
+        pointCreator.createRandomPoints(10, 500, 500);
+
+        ConvexHullArithmetic convexHullArithmetic = new ConvexHullArithmetic(pointCreator.getPoints());
+
+        Double test = convexHullArithmetic.calculate3PointsAngle(new Point(3, 2),new Point(2, 2),new Point(3, 3));
+        System.out.println(test);
+
+
     }
 }
