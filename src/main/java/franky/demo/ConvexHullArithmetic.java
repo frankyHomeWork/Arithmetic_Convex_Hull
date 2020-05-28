@@ -53,6 +53,21 @@ public class ConvexHullArithmetic {
                 System.out.println("TEST: threePointAngle :" + threePointAngle);
                 if (threePointAngle < 180) {
                     stack.remove(lastPoint);
+                    while(true){
+                        int nowPointIndex_inwhile = stack.size() - 1;
+                        Point nowPoint_inwhile = stack.get(nowPointIndex_inwhile);
+                        Point lastLastPoint_inwhile = stack.get(nowPointIndex_inwhile - 2);
+                        Point lastPoint_inwhile = stack.get(nowPointIndex_inwhile - 1);
+                        double threePointAngle_inwhile = calculate3PointsAngle(lastLastPoint_inwhile, lastPoint_inwhile, nowPoint_inwhile);
+                        System.out.println("TEST: threePointAngle :" + threePointAngle_inwhile);
+                        if (threePointAngle_inwhile < 180) {
+                            stack.remove(lastPoint_inwhile);
+                        } else {
+                            break;
+                        }
+                    }
+
+
                 }
                 count = 1;
             }
