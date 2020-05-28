@@ -3,6 +3,7 @@ package franky.demo;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Stack;
 
 public class ConvexHullArithmetic {
 
@@ -21,6 +22,21 @@ public class ConvexHullArithmetic {
 
     // 主要算法 利用stack 依序放入排序好的點 評估要不要放第三點時計算夾角是否大於180 如果大於放入 小於則彈出在序列的最後一個點
     // 在繼續重新評估剛剛要放入的點
+    public ArrayList<Point> getLinkLine() { //http://wiki.csie.ncku.edu.tw/acm/course/Convex%20Hull 參考
+        this.sortPointByAngle();
+        Stack<Point> stack = new Stack<Point>();
+        stack.push(minPointInOriginalPoints);
+
+        for (Point point : points_without_minPoint) {
+            if(stack.size() < 4) {
+
+            }
+
+
+        }
+        return new ArrayList<Point>(); //
+
+    }
 
 
 
