@@ -29,7 +29,7 @@ public class HW2 {
             public void actionPerformed(ActionEvent arg0) {
 //                a_canvas.printCircle(10);
                 pointCreator.clearPoints();
-                pointCreator.createRandomPoints(6, 300, 300);
+                pointCreator.createRandomPoints(10, 300, 300);
                 a_canvas.printCircle(pointCreator.getPoints());
             }
         });

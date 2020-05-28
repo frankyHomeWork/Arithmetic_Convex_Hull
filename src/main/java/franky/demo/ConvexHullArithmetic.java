@@ -36,10 +36,16 @@ public class ConvexHullArithmetic {
         int count = 0;
 
         for (Point point : points_without_minPoint) {
+            if(first) {
+                stack.push(point);
+                first = false;
+                continue;
+            }
 
             stack.push(point);
             count++;
-            if (count >= 3) {
+
+            if (count >= 2) {
                 int nowPointIndex = stack.size() - 1;
                 Point lastLastPoint = stack.get(nowPointIndex - 2);
                 Point lastPoint = stack.get(nowPointIndex - 1);
@@ -48,7 +54,7 @@ public class ConvexHullArithmetic {
                 if (threePointAngle < 180) {
                     stack.remove(lastPoint);
                 }
-                count = 0;
+                count = 1;
             }
             System.out.println("TEST: stack:" + stack);
 
@@ -74,17 +80,20 @@ public class ConvexHullArithmetic {
         //反餘弦計算弧度
         double radian = Math.acos(vector / sqrt);
 
-//        (point0X - vertexPointX)
-        
+        double angle = (180 * radian / Math.PI);
 
+        int ax = point0X - vertexPointX;
+        int ay = point0Y - vertexPointY;
 
+        int bx = point1X - vertexPointX;
+        int by = point1Y - vertexPointY;
 
-
-        if(radian > 180) {
-            return (180 * radian / Math.PI) + 180;
-        } else {
-            return (180 * radian / Math.PI);
+        // 參考 https://medium.com/@zhoukun2588/%E8%AE%A1%E7%AE%97%E4%B8%A4%E5%90%91%E9%87%8F%E7%9A%84%E6%97%8B%E8%BD%AC%E8%A7%92-ab2337aee4e7
+        int cross = ax * by - ay * bx;
+        if(cross < 0) {
+            angle = 360 - angle;
         }
+        return angle;
 
     }
 
