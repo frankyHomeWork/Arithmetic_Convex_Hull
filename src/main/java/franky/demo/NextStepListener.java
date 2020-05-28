@@ -7,14 +7,14 @@ import java.util.ArrayList;
 
 public class NextStepListener implements ActionListener {
     private ArrayList<Point> linePoints;
-    private TestCanvas canvas;
+    private PrintCircleCanvas canvas;
     private PointCreator pointCreator = PointCreator.getInstance();
     private ArrayList<Point> ansPoints;
 
     private int stepNum = 0;
     private ArrayList<Point> stepPoints = new ArrayList<Point>();
 
-    public NextStepListener(TestCanvas canvas) {
+    public NextStepListener(PrintCircleCanvas canvas) {
         this.canvas = canvas;
     }
 

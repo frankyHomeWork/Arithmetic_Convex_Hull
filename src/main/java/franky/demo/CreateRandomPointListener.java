@@ -6,14 +6,14 @@ import java.awt.event.ActionListener;
 public class CreateRandomPointListener implements ActionListener {
 
     private PointCreator pointCreator = PointCreator.getInstance();
-    private TestCanvas canvas;
+    private PrintCircleCanvas canvas;
     private NextStepListener nextStepListener;
 
     private int points_num = 30;
     private int points_range_start = 20;
     private int points_range_end = 400;
 
-    public CreateRandomPointListener(TestCanvas canvas, NextStepListener nextStepListener) {
+    public CreateRandomPointListener(PrintCircleCanvas canvas, NextStepListener nextStepListener) {
         this.canvas = canvas;
         this.nextStepListener = nextStepListener;
     }
@@ -22,7 +22,8 @@ public class CreateRandomPointListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         pointCreator.clearPoints();
         pointCreator.createRandomPoints(points_num, points_range_start, points_range_end);
-        canvas.printCircle(pointCreator.getPoints());
+        canvas.setPoints(pointCreator.getPoints());
+        canvas.print(canvas.getGraphics());
         nextStepListener.calculateConvexHull();
     }
 

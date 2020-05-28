@@ -3,9 +3,6 @@ package franky.demo;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class HW2 {
 
@@ -21,15 +18,15 @@ public class HW2 {
         JButton linkLineButton = new JButton("next Step");
         frame.add(linkLineButton, BorderLayout.SOUTH);
 
-        final TestCanvas a_canvas = new TestCanvas();
-        frame.add(a_canvas, BorderLayout.CENTER);
+        final PrintCircleCanvas printCircleCanvas = new PrintCircleCanvas();
+        frame.add(printCircleCanvas, BorderLayout.CENTER);
 
-        NextStepListener nextStepListener = new NextStepListener(a_canvas);
-        CreateRandomPointListener createRandomPointListener = new CreateRandomPointListener(a_canvas, nextStepListener);
+        NextStepListener nextStepListener = new NextStepListener(printCircleCanvas);
+        CreateRandomPointListener createRandomPointListener = new CreateRandomPointListener(printCircleCanvas, nextStepListener);
 
-        createRandomPointListener.setPoints_num(20);
-        createRandomPointListener.setPoints_range_start(50);
-        createRandomPointListener.setPoints_range_end(400);
+        createRandomPointListener.setPoints_num(25);
+        createRandomPointListener.setPoints_range_start(100);
+        createRandomPointListener.setPoints_range_end(700);
 
         resetButton.addActionListener(createRandomPointListener);
 
