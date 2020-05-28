@@ -4,3 +4,5 @@
 *.kotlin_module
 
 .idea/
+
+target/
