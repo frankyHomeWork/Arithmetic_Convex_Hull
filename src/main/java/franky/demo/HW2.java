@@ -2,9 +2,10 @@ package franky.demo;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class HW2 {
 
@@ -24,21 +25,32 @@ public class HW2 {
 
         final PointCreator pointCreator = PointCreator.getInstance();
 
+
         resetButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
 //                a_canvas.printCircle(10);
                 pointCreator.clearPoints();
-                pointCreator.createRandomPoints(10, 300, 300);
+                pointCreator.createRandomPoints(30, 300, 300);
                 a_canvas.printCircle(pointCreator.getPoints());
             }
         });
 
         linkLineButton.addActionListener(new ActionListener() {
+            ArrayList<Point> newLine = new ArrayList<Point>();
+            int ans_count = 0;
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 ConvexHullArithmetic convexHullArithmetic = new ConvexHullArithmetic(pointCreator.getPoints());
-                a_canvas.linkCircle(convexHullArithmetic.getLinkLine());
+                ArrayList<Point> ans =  convexHullArithmetic.getLinkLine();
+
+                newLine.add(ans.get(ans_count));
+
+                if(ans_count < ans.size() - 1) {
+                    ans_count++;
+                }
+
+                a_canvas.linkCircle(newLine);
             }
         });
 

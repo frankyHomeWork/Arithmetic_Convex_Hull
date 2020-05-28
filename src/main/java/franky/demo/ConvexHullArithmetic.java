@@ -66,6 +66,8 @@ public class ConvexHullArithmetic {
             System.out.println("TEST: stack:" + stack);
 
         }
+        stack.push(minPointInOriginalPoints);
+
         System.out.println(stack);
         return new ArrayList<Point>(stack); //
 
