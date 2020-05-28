@@ -73,8 +73,19 @@ public class ConvexHullArithmetic {
         );
         //反餘弦計算弧度
         double radian = Math.acos(vector / sqrt);
-        //弧度轉角度制
-        return 180 * radian / Math.PI;
+
+//        (point0X - vertexPointX)
+        
+
+
+
+
+        if(radian > 180) {
+            return (180 * radian / Math.PI) + 180;
+        } else {
+            return (180 * radian / Math.PI);
+        }
+
     }
 
     public void sortPointByAngle() {
@@ -144,6 +155,7 @@ public class ConvexHullArithmetic {
 
         return Math.toDegrees(Math.asin(radians));
     }
+
 
     public double calculateDistanceP1_to_P2(Point p1, Point p2) {
         int disX = p2.x - p1.x;
