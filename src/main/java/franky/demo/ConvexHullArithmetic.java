@@ -24,18 +24,37 @@ public class ConvexHullArithmetic {
     // 在繼續重新評估剛剛要放入的點
     public ArrayList<Point> getLinkLine() { //http://wiki.csie.ncku.edu.tw/acm/course/Convex%20Hull 參考
         this.sortPointByAngle();
+
+        System.out.println("TEST: sort first " + minPointInOriginalPoints);
+        System.out.println("TEST: sort" + points_without_minPoint);
+        System.out.println("TEST: sort" + points_angle);
+
         Stack<Point> stack = new Stack<Point>();
         stack.push(minPointInOriginalPoints);
 
+        boolean first = true;
+        int count = 0;
+
         for (Point point : points_without_minPoint) {
-            if(stack.size() < 4) {
 
-
+            stack.push(point);
+            count++;
+            if (count >= 3) {
+                int nowPointIndex = stack.size() - 1;
+                Point lastLastPoint = stack.get(nowPointIndex - 2);
+                Point lastPoint = stack.get(nowPointIndex - 1);
+                double threePointAngle = calculate3PointsAngle(lastLastPoint, lastPoint, point);
+                System.out.println("TEST: threePointAngle :" + threePointAngle);
+                if (threePointAngle < 180) {
+                    stack.remove(lastPoint);
+                }
+                count = 0;
             }
-
+            System.out.println("TEST: stack:" + stack);
 
         }
-        return new ArrayList<Point>(); //
+        System.out.println(stack);
+        return new ArrayList<Point>(stack); //
 
     }
 
@@ -75,7 +94,12 @@ public class ConvexHullArithmetic {
         Point minPoint = findMinPointInOriginalPoints();
         for (Point point : originalPoints) {
             if(minPoint != point) {
-                double angle = calculateAngle(minPoint, point);
+//                double angle = calculateAngle(minPoint, point);
+                double angle = calculate3PointsAngle(new Point(0, 0), minPoint, point);
+
+                System.out.println("TEST: point:" + point + ",angle: " + angle);
+
+
                 double distance = calculateDistanceP1_to_P2(minPoint, point);
                 points_without_minPoint.add((Point) point.clone());
                 points_angle.add(angle);
@@ -116,6 +140,7 @@ public class ConvexHullArithmetic {
             return 0;
         }
         double radians = disY / hypotenuse;
+        System.out.println("calculateAngle p2:" + p2 + ", Math.asin(radians): " + Math.asin(radians));
 
         return Math.toDegrees(Math.asin(radians));
     }

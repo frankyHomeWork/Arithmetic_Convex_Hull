@@ -22,12 +22,27 @@ public class HW2 {
         final TestCanvas a_canvas = new TestCanvas();
         frame.add(a_canvas, BorderLayout.CENTER);
 
+        final PointCreator pointCreator = PointCreator.getInstance();
+
         resetButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                a_canvas.printCircle(10);
+//                a_canvas.printCircle(10);
+                pointCreator.clearPoints();
+                pointCreator.createRandomPoints(6, 300, 300);
+                a_canvas.printCircle(pointCreator.getPoints());
             }
         });
+
+        linkLineButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                ConvexHullArithmetic convexHullArithmetic = new ConvexHullArithmetic(pointCreator.getPoints());
+                a_canvas.linkCircle(convexHullArithmetic.getLinkLine());
+            }
+        });
+
+
 
         frame.pack();
         frame.setLocationRelativeTo(null);

@@ -56,4 +56,13 @@ class ConvexHullArithmeticTest {
 
 
     }
+
+    @Test
+    void getLinkLine() {
+        PointCreator pointCreator = PointCreator.getInstance();
+        pointCreator.createRandomPoints(10, 500, 500);
+        ConvexHullArithmetic convexHullArithmetic = new ConvexHullArithmetic(pointCreator.getPoints());
+        convexHullArithmetic.getLinkLine();
+
+    }
 }
