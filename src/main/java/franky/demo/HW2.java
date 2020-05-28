@@ -29,7 +29,6 @@ public class HW2 {
         resetButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-//                a_canvas.printCircle(10);
                 pointCreator.clearPoints();
                 pointCreator.createRandomPoints(30, 300, 300);
                 a_canvas.printCircle(pointCreator.getPoints());
@@ -38,16 +37,18 @@ public class HW2 {
 
         linkLineButton.addActionListener(new ActionListener() {
             ArrayList<Point> newLine = new ArrayList<Point>();
-            int ans_count = 0;
+
+            ConvexHullArithmetic convexHullArithmetic = new ConvexHullArithmetic(pointCreator.getPoints());
+            saveConvexHullPoints =  convexHullArithmetic.getLinkLine();
+
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                ConvexHullArithmetic convexHullArithmetic = new ConvexHullArithmetic(pointCreator.getPoints());
-                ArrayList<Point> ans =  convexHullArithmetic.getLinkLine();
 
-                newLine.add(ans.get(ans_count));
 
-                if(ans_count < ans.size() - 1) {
-                    ans_count++;
+                newLine.add(ans.get(ans_count[0]));
+
+                if(ans_count[0] < ans.size() - 1) {
+                    ans_count[0]++;
                 }
 
                 a_canvas.linkCircle(newLine);
