@@ -18,10 +18,6 @@ public class ConvexHullArithmetic {
         this.originalPoints = points;
     }
 
-    // 要一個使用三個點 算角度的 方法 p1 -> p2 -> p3  算夾角
-
-    // 主要算法 利用stack 依序放入排序好的點 評估要不要放第三點時計算夾角是否大於180 如果大於放入 小於則彈出在序列的最後一個點
-    // 在繼續重新評估剛剛要放入的點
     public ArrayList<Point> getLinkLine() {
         this.sortPointByAngle();
         //以下參考 http://wiki.csie.ncku.edu.tw/acm/course/Convex%20Hull  這方法p0 p1 p2 會先被放入
