@@ -22,54 +22,46 @@ public class ConvexHullArithmetic {
 
     // 主要算法 利用stack 依序放入排序好的點 評估要不要放第三點時計算夾角是否大於180 如果大於放入 小於則彈出在序列的最後一個點
     // 在繼續重新評估剛剛要放入的點
-    public ArrayList<Point> getLinkLine() { //http://wiki.csie.ncku.edu.tw/acm/course/Convex%20Hull 參考
+    public ArrayList<Point> getLinkLine() {
         this.sortPointByAngle();
 
         System.out.println("TEST: sort first " + minPointInOriginalPoints);
         System.out.println("TEST: sort" + points_without_minPoint);
         System.out.println("TEST: sort" + points_angle);
 
+        //以下參考 http://wiki.csie.ncku.edu.tw/acm/course/Convex%20Hull  這方法p0 p1 p2 會先被放入
         Stack<Point> stack = new Stack<Point>();
-        stack.push(minPointInOriginalPoints);
+        stack.push(minPointInOriginalPoints); // p0 會先被放入
 
-        boolean first = true;
-        int count = 0;
+        boolean isStep1_And_Step2 = true;
+        int step_count = 0;
 
         for (Point point : points_without_minPoint) {
-            if(first) {
+            if(isStep1_And_Step2) { // p1 p2
                 stack.push(point);
-                first = false;
+                step_count++;
+                if(step_count >= 2) {
+                    isStep1_And_Step2 = false;
+                }
                 continue;
             }
 
             stack.push(point);
-            count++;
+            while(true){
 
-            if (count >= 2) {
+
                 int nowPointIndex = stack.size() - 1;
-                Point lastLastPoint = stack.get(nowPointIndex - 2);
+                Point nowPoint = stack.get(nowPointIndex);
                 Point lastPoint = stack.get(nowPointIndex - 1);
-                double threePointAngle = calculate3PointsAngle(lastLastPoint, lastPoint, point);
-                System.out.println("TEST: threePointAngle :" + threePointAngle);
+                Point lastLastPoint = stack.get(nowPointIndex - 2);
+
+                double threePointAngle = calculate3PointsAngle(lastLastPoint, lastPoint, nowPoint); // 算夾角
                 if (threePointAngle < 180) {
+                    System.out.println("TEST: threePointAngle :" + threePointAngle);
                     stack.remove(lastPoint);
-                    while(true){
-                        int nowPointIndex_inwhile = stack.size() - 1;
-                        Point nowPoint_inwhile = stack.get(nowPointIndex_inwhile);
-                        Point lastLastPoint_inwhile = stack.get(nowPointIndex_inwhile - 2);
-                        Point lastPoint_inwhile = stack.get(nowPointIndex_inwhile - 1);
-                        double threePointAngle_inwhile = calculate3PointsAngle(lastLastPoint_inwhile, lastPoint_inwhile, nowPoint_inwhile);
-                        System.out.println("TEST: threePointAngle :" + threePointAngle_inwhile);
-                        if (threePointAngle_inwhile < 180) {
-                            stack.remove(lastPoint_inwhile);
-                        } else {
-                            break;
-                        }
-                    }
-
-
+                } else {
+                    break;
                 }
-                count = 1;
             }
             System.out.println("TEST: stack:" + stack);
 
