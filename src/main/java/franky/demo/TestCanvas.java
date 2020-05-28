@@ -36,7 +36,7 @@ public class TestCanvas extends Canvas {
         int circle_size = 10;
         for (Point point : points) {
             this.getGraphics().fillOval((int) point.getX(), (int) point.getY(), circle_size, circle_size);
-            String pointStr = "" + (int)point.getX() + ", " + (int) point.getY();
+            String pointStr = "" + (int) point.getX() + ", " + (int) point.getY();
             this.getGraphics().drawString(pointStr, (int) point.getX(), (int) point.getY());
         }
 
@@ -48,7 +48,7 @@ public class TestCanvas extends Canvas {
         Point lastPoint = null;
 
         for (Point point : points) {
-            if(isFirst) {
+            if (isFirst) {
                 // pass
                 isFirst = false;
             } else {
@@ -60,10 +60,6 @@ public class TestCanvas extends Canvas {
 
         System.out.println(points.toString());
     }
-
-
-
-
 
 
     public void clearAll() {

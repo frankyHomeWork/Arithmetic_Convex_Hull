@@ -14,7 +14,7 @@ public class NextStepListener implements ActionListener {
     private int stepNum = 0;
     private ArrayList<Point> stepPoints = new ArrayList<Point>();
 
-    public NextStepListener(TestCanvas canvas){
+    public NextStepListener(TestCanvas canvas) {
         this.canvas = canvas;
     }
 
@@ -34,7 +34,7 @@ public class NextStepListener implements ActionListener {
 
         canvas.linkCircle(stepPoints);
 
-        if(stepNum < ansPoints.size() - 1) {
+        if (stepNum < ansPoints.size() - 1) {
             stepNum++;
         }
     }

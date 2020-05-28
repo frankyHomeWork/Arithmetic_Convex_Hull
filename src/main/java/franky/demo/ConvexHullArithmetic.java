@@ -37,17 +37,17 @@ public class ConvexHullArithmetic {
         int step_count = 0;
 
         for (Point point : points_without_minPoint) {
-            if(isStep1_And_Step2) { // p1 p2
+            if (isStep1_And_Step2) { // p1 p2
                 stack.push(point);
                 step_count++;
-                if(step_count >= 2) {
+                if (step_count >= 2) {
                     isStep1_And_Step2 = false;
                 }
                 continue;
             }
 
             stack.push(point);
-            while(true){
+            while (true) {
 
 
                 int nowPointIndex = stack.size() - 1;
@@ -56,7 +56,7 @@ public class ConvexHullArithmetic {
                 Point lastLastPoint = stack.get(nowPointIndex - 2);
 
                 double threePointAngle = calculate3PointsAngle(lastLastPoint, lastPoint, nowPoint); // 算夾角
-                System.out.println("p:"+ nowPoint + "pL:" + lastPoint + "pLL:" + lastLastPoint + "threePointAngle :" + threePointAngle);
+                System.out.println("p:" + nowPoint + "pL:" + lastPoint + "pLL:" + lastLastPoint + "threePointAngle :" + threePointAngle);
                 if (threePointAngle < 180 || Double.isNaN(threePointAngle)) {
 
                     stack.remove(lastPoint);
@@ -84,7 +84,6 @@ public class ConvexHullArithmetic {
         int vector = (point0X - vertexPointX) * (point1X - vertexPointX) + (point0Y - vertexPointY) * (point1Y - vertexPointY);
 
 
-
         double v1_x = point0X - vertexPointX;
         double v1_y = point0Y - vertexPointY;
 
@@ -93,24 +92,12 @@ public class ConvexHullArithmetic {
 
         //向量的模乘
         double sqrt = Math.sqrt(
-                (Math.abs( Math.pow(v1_x, 2) ) + Math.abs( Math.pow(v1_y, 2) ))
-                        * (Math.abs(Math.pow(v2_x, 2)) + Math.abs(Math.pow(v2_y, 2)))   );
-
-
-
-
-
-//        //向量的模乘
-//        double sqrt = Math.sqrt(
-//                (Math.abs((point0X - vertexPointX) * (point0X - vertexPointX)) + Math.abs((point0Y - vertexPointY) * (point0Y - vertexPointY)))
-//                        * (Math.abs((point1X - vertexPointX) * (point1X - vertexPointX)) + Math.abs((point1Y - vertexPointY) * (point1Y - vertexPointY)))
-//        );
-
-
+                (Math.abs(Math.pow(v1_x, 2)) + Math.abs(Math.pow(v1_y, 2)))
+                        * (Math.abs(Math.pow(v2_x, 2)) + Math.abs(Math.pow(v2_y, 2))));
 
         //反餘弦計算弧度
 
-        if(sqrt<=0) {
+        if (sqrt <= 0) {
             return 0;
         }
 
@@ -126,10 +113,10 @@ public class ConvexHullArithmetic {
 
         // 參考 https://medium.com/@zhoukun2588/%E8%AE%A1%E7%AE%97%E4%B8%A4%E5%90%91%E9%87%8F%E7%9A%84%E6%97%8B%E8%BD%AC%E8%A7%92-ab2337aee4e7
         int cross = ax * by - ay * bx;
-        if(cross < 0) {
+        if (cross < 0) {
             angle = 360 - angle;
         }
-        if(Double.isNaN(angle)) {
+        if (Double.isNaN(angle)) {
             System.out.println("TEST NAN:  sqrt: " + sqrt + ", radian:" + radian);
         }
 
@@ -153,7 +140,7 @@ public class ConvexHullArithmetic {
     public void calculateAngleWithMinPoint() {
         Point minPoint = findMinPointInOriginalPoints();
         for (Point point : originalPoints) {
-            if(minPoint != point) {
+            if (minPoint != point) {
 //                double angle = calculateAngle(minPoint, point);
                 double angle = calculate3PointsAngle(new Point(0, 0), minPoint, point);
 
