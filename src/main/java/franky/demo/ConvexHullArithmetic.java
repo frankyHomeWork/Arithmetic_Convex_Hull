@@ -56,8 +56,9 @@ public class ConvexHullArithmetic {
                 Point lastLastPoint = stack.get(nowPointIndex - 2);
 
                 double threePointAngle = calculate3PointsAngle(lastLastPoint, lastPoint, nowPoint); // 算夾角
-                if (threePointAngle < 180) {
-                    System.out.println("TEST: threePointAngle :" + threePointAngle);
+                System.out.println("p:"+ nowPoint + "pL:" + lastPoint + "pLL:" + lastLastPoint + "threePointAngle :" + threePointAngle);
+                if (threePointAngle < 180 || Double.isNaN(threePointAngle)) {
+
                     stack.remove(lastPoint);
                 } else {
                     break;
@@ -81,12 +82,38 @@ public class ConvexHullArithmetic {
         //code copy from https://www.twblogs.net/a/5c015ea0bd9eee7aed33aa0f
         //向量的點乘
         int vector = (point0X - vertexPointX) * (point1X - vertexPointX) + (point0Y - vertexPointY) * (point1Y - vertexPointY);
+
+
+
+        double v1_x = point0X - vertexPointX;
+        double v1_y = point0Y - vertexPointY;
+
+        double v2_x = point1X - vertexPointX;
+        double v2_y = point1Y - vertexPointY;
+
         //向量的模乘
         double sqrt = Math.sqrt(
-                (Math.abs((point0X - vertexPointX) * (point0X - vertexPointX)) + Math.abs((point0Y - vertexPointY) * (point0Y - vertexPointY)))
-                        * (Math.abs((point1X - vertexPointX) * (point1X - vertexPointX)) + Math.abs((point1Y - vertexPointY) * (point1Y - vertexPointY)))
-        );
+                (Math.abs( Math.pow(v1_x, 2) ) + Math.abs( Math.pow(v1_y, 2) ))
+                        * (Math.abs(Math.pow(v2_x, 2)) + Math.abs(Math.pow(v2_y, 2)))   );
+
+
+
+
+
+//        //向量的模乘
+//        double sqrt = Math.sqrt(
+//                (Math.abs((point0X - vertexPointX) * (point0X - vertexPointX)) + Math.abs((point0Y - vertexPointY) * (point0Y - vertexPointY)))
+//                        * (Math.abs((point1X - vertexPointX) * (point1X - vertexPointX)) + Math.abs((point1Y - vertexPointY) * (point1Y - vertexPointY)))
+//        );
+
+
+
         //反餘弦計算弧度
+
+        if(sqrt<=0) {
+            return 0;
+        }
+
         double radian = Math.acos(vector / sqrt);
 
         double angle = (180 * radian / Math.PI);
@@ -102,6 +129,10 @@ public class ConvexHullArithmetic {
         if(cross < 0) {
             angle = 360 - angle;
         }
+        if(Double.isNaN(angle)) {
+            System.out.println("TEST NAN:  sqrt: " + sqrt + ", radian:" + radian);
+        }
+
         return angle;
 
     }

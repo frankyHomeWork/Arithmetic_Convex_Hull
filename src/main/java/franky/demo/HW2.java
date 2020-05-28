@@ -14,48 +14,21 @@ public class HW2 {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(new BorderLayout());
 
-        JButton linkLineButton = new JButton("next Step");
-        frame.add(linkLineButton, BorderLayout.SOUTH);
 
         JButton resetButton = new JButton("Reset");
         frame.add(resetButton, BorderLayout.NORTH);
 
+        JButton linkLineButton = new JButton("next Step");
+        frame.add(linkLineButton, BorderLayout.SOUTH);
+
         final TestCanvas a_canvas = new TestCanvas();
         frame.add(a_canvas, BorderLayout.CENTER);
 
-        final PointCreator pointCreator = PointCreator.getInstance();
+        NextStepListener nextStepListener = new NextStepListener(a_canvas);
+        CreateRandomPointListener createRandomPointListener = new CreateRandomPointListener(a_canvas, nextStepListener);
+        resetButton.addActionListener(createRandomPointListener);
 
-
-        resetButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                pointCreator.clearPoints();
-                pointCreator.createRandomPoints(30, 300, 300);
-                a_canvas.printCircle(pointCreator.getPoints());
-            }
-        });
-
-        linkLineButton.addActionListener(new ActionListener() {
-            ArrayList<Point> newLine = new ArrayList<Point>();
-
-            ConvexHullArithmetic convexHullArithmetic = new ConvexHullArithmetic(pointCreator.getPoints());
-            saveConvexHullPoints =  convexHullArithmetic.getLinkLine();
-
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-
-
-                newLine.add(ans.get(ans_count[0]));
-
-                if(ans_count[0] < ans.size() - 1) {
-                    ans_count[0]++;
-                }
-
-                a_canvas.linkCircle(newLine);
-            }
-        });
-
-
+        linkLineButton.addActionListener(nextStepListener);
 
         frame.pack();
         frame.setLocationRelativeTo(null);
