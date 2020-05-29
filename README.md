@@ -2,6 +2,11 @@
 ## 可直接運行的jar
 在根資料夾下 `HW2-1.0-SNAPSHOT.jar`
 ![image](./gif/demo.gif)
+
+## 主要程式位置
+* main函式進入點 => `./src/main/java/franky/demo/HW2.java`
+* 演算法物件 =>  `./src/main/java/franky/demo/ConvexHullArithmetic.java`
+
 ## 編譯環境與指令
 ### 環境 
 * java => 1.8.0_231
